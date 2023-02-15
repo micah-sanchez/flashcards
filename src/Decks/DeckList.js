@@ -26,11 +26,22 @@ function DeckList() {
     }, [])
 
     const deckComponents = decks.map((deck) => {
+        const cardLength = deck.cards.length;
         return (
-            <fieldset>
-                <h1>{deck.name}</h1>
-                <h4>{deck.description}</h4>
+            <>
+
+            <fieldset style={{border:"solid"}}>
                 <table>
+                    <thead>
+                        <tr>
+                            <td><h1>{deck.name}</h1></td>
+                            <td>{cardLength} cards</td>  
+                        </tr>
+                        <tr>
+                            <h4>{deck.description}</h4>
+                        </tr>
+                        
+                    </thead>
                     <tbody>
                         <tr>
                             <button onClick={(event) => {
@@ -41,6 +52,8 @@ function DeckList() {
                     </tbody>
                 </table>
             </fieldset>
+            </>
+            
             
         )
     })
