@@ -30,6 +30,10 @@ function CreateDeck() {
 
     return (
         <>
+            <div style={{paddingLeft: "35px", width: "20%", backgroundColor:"light"}}>
+                <a href="/" >Home</a> / Create Deck
+            </div>
+            
             <h1>Create Deck</h1>
             <form onSubmit={handleSubmit}>
                 <label style={{width:'100%'}}>Name</label>
