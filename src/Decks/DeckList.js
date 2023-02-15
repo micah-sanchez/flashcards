@@ -1,8 +1,10 @@
 import React, {useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { listDecks } from "../utils/api";
 
 function DeckList() {
 
+    const history = useHistory();
     const [decks, setDecks] = useState([]);
 
     useEffect(() => {
@@ -11,7 +13,6 @@ function DeckList() {
 
             try {
                 const decksData = await listDecks();
-                console.log(decks);
                 setDecks(decksData);
             } catch (error) {
                 if (error.name === "AbortError") {
@@ -24,14 +25,22 @@ function DeckList() {
         loadDecks();
     }, [])
 
-    
-
     const deckComponents = decks.map((deck) => {
         return (
-            <>
+            <fieldset>
                 <h1>{deck.name}</h1>
                 <h4>{deck.description}</h4>
-            </>
+                <table>
+                    <tbody>
+                        <tr>
+                            <button onClick={(event) => {
+                        history.push(`/decks/${deck.id}`)}}>View</button>
+                            <button onClick={(event) => history.push(`/decks/${deck.id}/study`)}>Study</button>
+                            <button>Trash</button>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
             
         )
     })
