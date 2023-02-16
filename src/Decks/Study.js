@@ -36,14 +36,24 @@ function Study({decks}, {flipButton}) {
         } else {
             setFrontSide(!frontSide);
         }
-        console.log("flipped 2.0!", index,)
     }
 
     const nextHandler = (event) => {
-        setFrontSide(!frontSide)
-        setIndex(index + 1)
+        if (index + 1 !== foundLength) {
+          console.log("index", index)
+          setFrontSide(!frontSide)
+          setIndex(index + 1)
+        } else {
+            if (window.confirm("Restart cards?\n\nClick 'Cancel' to return to the home page.")) {
+                setFrontSide(!frontSide)
+                setIndex(0)
+            } else {
+                window.open("/")
+            }
+          
+        }
+        
     }
-    console.log(frontSide, index)
 
     if (frontSide) {
         return (
