@@ -1,11 +1,10 @@
 import React, {useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { listDecks } from "../utils/api";
+import { listDecks, deleteDeck } from "../utils/api";
 
-function DeckList() {
+function DeckList({decks, setDecks}) {
 
     const history = useHistory();
-    const [decks, setDecks] = useState([]);
 
     useEffect(() => {
 
@@ -25,38 +24,47 @@ function DeckList() {
         loadDecks();
     }, [])
 
-    const deckComponents = decks.map((deck) => {
+    const deckComponents = decks.map((deck, index) => {
         const cardLength = deck.cards.length;
         return (
-            <>
-
-            <fieldset style={{border:"solid"}}>
-                <table>
-                    <thead>
-                        <tr>
-                            <td><h1>{deck.name}</h1></td>
-                            <td>{cardLength} cards</td>  
-                        </tr>
-                        <tr>
-                            <h4>{deck.description}</h4>
-                        </tr>
+            <div style={{ paddingTop:"20px"}}>
+            <div style={{border:"solid", borderRadius:"10px", padding:"10px"}}>
+                <table >
+                    <thead >
+                        <div>
+                            <tr style={{width:"100%"}}>
+                                <td><h1>{deck.name}</h1></td>
+                                <td>{cardLength} cards</td>  
+                            </tr>
+                            <tr>
+                                <h4>{deck.description}</h4>
+                            </tr>
+                        </div>
+                        
                         
                     </thead>
                     <tbody>
                         <tr>
-                            <button onClick={(event) => {
+                            <button style={{marginRight:"10px", borderRadius:"10px"}} onClick={(event) => {
                         history.push(`/decks/${deck.id}`)}}>View</button>
-                            <button onClick={(event) => history.push(`/decks/${deck.id}/study`)}>Study</button>
-                            <button>Trash</button>
+                            <button style={{marginRight:"10px", borderRadius:"10px"}}onClick={(event) => history.push(`/decks/${deck.id}/study`)}>Study</button>
+                            <button style={{borderRadius:"10px"}} onClick={() => {handleDelete(deck.id, index)}}>Trash</button>
                         </tr>
                     </tbody>
                 </table>
-            </fieldset>
-            </>
-            
-            
+            </div>
+            </div>
         )
-    })
+    });
+
+    const handleDelete = (id, arrayIndex) => {
+        if (window.confirm("Delete this deck?")) {
+            deleteDeck(id)
+            decks.splice(arrayIndex, 1);
+            setDecks(prev => [...decks])
+            window.open("/")
+        }
+    }
 
     return deckComponents
 }
