@@ -5,6 +5,7 @@ import { readDeck } from "../utils/api";
 function Study({decks}, {flipButton}) {
 
     const [frontSide, setFrontSide] = useState(true);
+    const [index, setIndex] = useState(0);
 
     const param = Number.parseInt(useParams().deckId)
     const deckIdNumber = Number.parseInt(param)
@@ -14,7 +15,6 @@ function Study({decks}, {flipButton}) {
     const deckId = found.id;
     const cards = found.cards;
     const foundLength = found.cards.length;
-    let index = 0;
     const front = found.cards[index].front;
     const back = found.cards[index].back
     
@@ -35,9 +35,13 @@ function Study({decks}, {flipButton}) {
             setFrontSide(!frontSide);
         } else {
             setFrontSide(!frontSide);
-            index += 1;
         }
         console.log("flipped 2.0!", index,)
+    }
+
+    const nextHandler = (event) => {
+        setFrontSide(!frontSide)
+        setIndex(index + 1)
     }
     console.log(frontSide, index)
 
@@ -75,7 +79,7 @@ function Study({decks}, {flipButton}) {
                 <h4>Card {index+1} of {foundLength}</h4>
                     <p>{back}</p>
                     <button style={{borderRadius: "10px"}} onClick={flipHandler}>Flip</button>
-                    <button style={{marginLeft:"10px", borderRadius: "10px"}} onClick={flipHandler}>Next</button>
+                    <button style={{marginLeft:"10px", borderRadius: "10px"}} onClick={nextHandler}>Next</button>
                 </div>
                 
                 </>
