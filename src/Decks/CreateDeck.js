@@ -17,22 +17,22 @@ function CreateDeck() {
             ...formData,
             [target.name]: target.value
         });
-        console.log(formData)
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("submitted!");
         createDeck(formData);
         setFormData(initialFormData);
-
     }
 
     return (
         <>
-            <div style={{paddingLeft: "35px", width: "20%", backgroundColor:"light"}}>
-                <a href="/" >Home</a> / Create Deck
-            </div>
+
+        <ul class="breadcrumb">
+            <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
+            <li>/</li>
+            <li style={{paddingRight:"10px", paddingLeft:"10px"}}>Create Deck</li>
+        </ul>
             
             <h1>Create Deck</h1>
             <form onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ function CreateDeck() {
                     value={formData.description}
                 />
                  <button onClick={() => history.push("/")}>Cancel</button>
-                 <button type="submit" onClick={() => history.push("/decks")}>Submit</button>
+                 <button type="submit" >Submit</button>
             </form>
            
         </>
