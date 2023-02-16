@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Route, useParams, useHistory } from "react-router-dom";
+import NotFound from "../Layout/NotFound";
 import { readDeck } from "../utils/api";
+import AddCards from "../Cards/AddCards";
 
-function Study({decks}, {flipButton}) {
+function Study({decks}) {
+
+    const history = useHistory();
 
     const [frontSide, setFrontSide] = useState(true);
     const [index, setIndex] = useState(0);
@@ -12,8 +16,6 @@ function Study({decks}, {flipButton}) {
 
     const found = decks.find((deck) => deck.id === param);
     const deckName = found.name;
-    const deckId = found.id;
-    const cards = found.cards;
     const foundLength = found.cards.length;
     const front = found.cards[index].front;
     const back = found.cards[index].back
@@ -22,7 +24,6 @@ function Study({decks}, {flipButton}) {
         async function getDeck() {
             try {
                 const response = await readDeck(deckIdNumber);
-                //setStudyDeck(response)
             } catch(error) {
                 throw error
             }
@@ -50,9 +51,25 @@ function Study({decks}, {flipButton}) {
             } else {
                 window.open("/")
             }
-          
         }
-        
+    }
+
+    if (foundLength < 3) {
+        return (
+        <>
+            <ul class="breadcrumb">
+                <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
+                <li>/</li>
+                <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="#">{deckName}</a></li>
+                <li>/</li>
+                <li style={{paddingRight:"10px", paddingLeft:"10px"}}>Study</li>
+            </ul>
+            <h1>Study: {deckName}</h1>
+            <h2>Not enough cards.</h2>
+            <p>You need at least 3 cards to study. There are {foundLength} cards in this deck.</p>
+            <button style={{borderRadius: "10px"}} onClick={history.push(`/decks/${found.id}/cards/new`)}>Add Cards</button>
+        </>
+        )
     }
 
     if (frontSide) {
