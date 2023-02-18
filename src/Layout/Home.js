@@ -8,6 +8,7 @@ import ViewDeck from "../Decks/ViewDeck"
 import AddCards from "../Cards/AddCards";
 import { deleteDeck } from "../utils/api";
 import EditDeck from "../Decks/EditDeck";
+import EditCard from "../Cards/EditCard";
 
 function Home() {
 
@@ -44,6 +45,9 @@ function Home() {
                 </Route>
                 <Route exact path="/decks/:deckId/edit">
                     <EditDeck />
+                </Route>
+                <Route exact path="/decks/:deckId/cards/:cardId/edit">
+                    <EditCard />
                 </Route>
                 <Route>
                     <NotFound />
