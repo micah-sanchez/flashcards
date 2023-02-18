@@ -4,7 +4,7 @@ import { listDecks, deleteDeck } from "../utils/api";
 
 function DeckList({decks, setDecks}) {
 
-    const history = useHistory();
+    const history = useHistory(); 
 
     useEffect(() => {
 
