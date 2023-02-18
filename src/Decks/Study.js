@@ -13,12 +13,6 @@ function Study({decks}) {
 
     const param = Number.parseInt(useParams().deckId)
     const deckIdNumber = Number.parseInt(param)
-
-    const found = decks.find((deck) => deck.id === param);
-    const deckName = found.name;
-    const foundLength = found.cards.length;
-    const front = found.cards[index].front;
-    const back = found.cards[index].back
     
     useEffect(() => {
         async function getDeck() {
@@ -30,6 +24,12 @@ function Study({decks}) {
         }
         getDeck();
     }, []);
+
+    const found = decks.find((deck) => deck.id === param);
+    const deckName = found.name;
+    const foundLength = found.cards.length;
+    const front = found.cards[index].front;
+    const back = found.cards[index].back
 
     const flipHandler = (event) => {
         if (frontSide) {
@@ -57,7 +57,7 @@ function Study({decks}) {
     if (foundLength < 3) {
         return (
         <>
-            <ul class="breadcrumb">
+            <ul className="breadcrumb">
                 <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
                 <li>/</li>
                 <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="#">{deckName}</a></li>
@@ -67,7 +67,7 @@ function Study({decks}) {
             <h1>Study: {deckName}</h1>
             <h2>Not enough cards.</h2>
             <p>You need at least 3 cards to study. There are {foundLength} cards in this deck.</p>
-            <button style={{borderRadius: "10px"}} onClick={history.push(`/decks/${found.id}/cards/new`)}>Add Cards</button>
+            <button style={{borderRadius: "10px"}} onClick={()=>{history.push(`/decks/${found.id}/cards/new`)}}>Add Cards</button>
         </>
         )
     }
@@ -94,7 +94,7 @@ function Study({decks}) {
     } else {
         return (
             <>
-                <ul class="breadcrumb">
+                <ul className="breadcrumb">
                     <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
                     <li>/</li>
                     <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="#">{deckName}</a></li>
