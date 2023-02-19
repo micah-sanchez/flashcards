@@ -8,8 +8,38 @@ function Study({decks}) {
 
     const history = useHistory();
 
+    // const [frontSide, setFrontSide] = useState(true);
+    // const [index, setIndex] = useState(0);
+    // const [deck, setDeck] = useState({});
+    // const [cards, setCards] = useState([]);
+
+    // const params = useParams();
+    // const deckIdNumber = params.deckId;
+    
+    // useEffect(() => {
+    //     async function getDeck() {
+    //         try {
+    //             const response = await readDeck(deckIdNumber);
+    //             setDeck(response);
+    //             setCards(response.cards)
+    //         } catch(error) {
+    //             throw error
+    //         }
+    //     }
+    //     getDeck();
+    // }, []);
+  
+    //const found = decks.find((deck) => deck.id === param);
+    // const deckName = deck.name;
+    // const foundLength = cards.length;
+    // const front = cards[index].front;
+    // const back = cards[index].back;
+
+    const [foundDeck, setFoundDeck] = useState();
     const [frontSide, setFrontSide] = useState(true);
     const [index, setIndex] = useState(0);
+    const [cards, setCards] = useState([]);
+
 
     const param = Number.parseInt(useParams().deckId)
     const deckIdNumber = Number.parseInt(param)
@@ -18,13 +48,16 @@ function Study({decks}) {
         async function getDeck() {
             try {
                 const response = await readDeck(deckIdNumber);
+                setFoundDeck(response)
+                setCards(response.cards)
+                //console.log("found", foundDeck)
             } catch(error) {
                 throw error
             }
         }
         getDeck();
-    }, []);
-
+    }, [deckIdNumber]);
+    
     const found = decks.find((deck) => deck.id === param);
     const deckName = found.name;
     const foundLength = found.cards.length;
@@ -67,7 +100,7 @@ function Study({decks}) {
             <h1>Study: {deckName}</h1>
             <h2>Not enough cards.</h2>
             <p>You need at least 3 cards to study. There are {foundLength} cards in this deck.</p>
-            <button style={{borderRadius: "10px"}} onClick={()=>{history.push(`/decks/${found.id}/cards/new`)}}>Add Cards</button>
+            <button style={{borderRadius: "10px"}} onClick={()=>{history.push(`/decks/${deckIdNumber}/cards/new`)}}>Add Cards</button>
         </>
         )
     }
