@@ -30,7 +30,7 @@ function ViewDeck({handleDelete}) {
     }, [deckId]);
 
     const editClickHandler = (index) => {
-        history.push(`/decks/${deckId}/cards/${index}/edit`);
+        history.push(`/decks/${deckId}/cards/${index+1}/edit`);
     }
 
     let cardList;
