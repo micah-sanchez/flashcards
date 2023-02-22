@@ -40,7 +40,6 @@ function AddCards({decks}) {
     
     const addCardSubmitHandler = (event) => {
         event.preventDefault();
-        console.log("clicked")
         createCard(deckId);
         setCardData(initialCardData);
     }
