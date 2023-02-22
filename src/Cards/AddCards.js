@@ -38,7 +38,6 @@ function AddCards({decks}) {
         console.log(cardData)
     }
     
-    console.log(deckId)
     const addCardSubmitHandler = (event) => {
         event.preventDefault();
         console.log("clicked")
