@@ -102,7 +102,7 @@ function EditCard() {
                 rows="3"
                 onChange={editCardChangeHandler}
               />
-              <button style={{marginTop: "20px", marginRight: "10px", borderRadius: "10px"}} onClick={() => history.push(`/decks/${deckIdentifier}`)}>Cancel</button>
+              <button style={{marginTop: "20px", marginRight: "10px", borderRadius: "10px"}} onClick={() => history.push(`/decks/${deckId}`)}>Cancel</button>
               <button style={{borderRadius: "10px"}} type="submit" >Submit</button>
             </form>
         </>
