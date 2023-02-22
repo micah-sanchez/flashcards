@@ -8,62 +8,31 @@ function Study({decks}) {
 
     const history = useHistory();
 
-    // const [frontSide, setFrontSide] = useState(true);
-    // const [index, setIndex] = useState(0);
-    // const [deck, setDeck] = useState({});
-    // const [cards, setCards] = useState([]);
-
-    // const params = useParams();
-    // const deckIdNumber = params.deckId;
-    
-    // useEffect(() => {
-    //     async function getDeck() {
-    //         try {
-    //             const response = await readDeck(deckIdNumber);
-    //             setDeck(response);
-    //             setCards(response.cards)
-    //         } catch(error) {
-    //             throw error
-    //         }
-    //     }
-    //     getDeck();
-    // }, []);
-  
-    //const found = decks.find((deck) => deck.id === param);
-    // const deckName = deck.name;
-    // const foundLength = cards.length;
-    // const front = cards[index].front;
-    // const back = cards[index].back;
-
-    const [foundDeck, setFoundDeck] = useState();
     const [frontSide, setFrontSide] = useState(true);
     const [index, setIndex] = useState(0);
+    const [deck, setDeck] = useState({});
     const [cards, setCards] = useState([]);
 
-
-    const param = Number.parseInt(useParams().deckId)
-    const deckIdNumber = Number.parseInt(param)
+    const params = useParams();
+    const deckIdNumber = params.deckId;
     
     useEffect(() => {
         async function getDeck() {
             try {
                 const response = await readDeck(deckIdNumber);
-                setFoundDeck(response)
+                setDeck(response);
                 setCards(response.cards)
-                //console.log("found", foundDeck)
             } catch(error) {
                 throw error
             }
         }
         getDeck();
-    }, [deckIdNumber]);
+    }, []);
     
-    const found = decks.find((deck) => deck.id === param);
-    const deckName = found.name;
-    const foundLength = found.cards.length;
-    const front = found.cards[index].front;
-    const back = found.cards[index].back
-
+    const currentCard = cards[index] || {}
+    const deckName = deck.name;
+    const foundLength = cards.length;
+    
     const flipHandler = (event) => {
         if (frontSide) {
             setFrontSide(!frontSide);
@@ -106,6 +75,8 @@ function Study({decks}) {
     }
 
     if (frontSide) {
+        const front = currentCard.front;
+        const back = currentCard.back;
         return (
             <>
             <ul class="breadcrumb">
@@ -125,6 +96,8 @@ function Study({decks}) {
             </>
         )
     } else {
+        const front = currentCard.front;
+        const back = currentCard.back;
         return (
             <>
                 <ul className="breadcrumb">
