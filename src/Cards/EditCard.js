@@ -10,7 +10,7 @@ function EditCard() {
 //     const deckIdentifier = Number.parseInt(useParams().deckId);
 //     const cardIdentifier = Number.parseInt(useParams().cardId);
   
-    const [cardCard, setCard]= useState({})
+    const [card, setCard]= useState({})
     const [cardFront, setCardFront] = useState("");
     const [cardBack, setCardBack] = useState("");
     const [deck, setDeck] = useState("");
@@ -66,7 +66,7 @@ function EditCard() {
         updateCard({
             ...card,
                 front: 
-          Front,
+          cardFront,
                 back: cardBack,
             })
         history.push(`/decks/${deckId}`)
