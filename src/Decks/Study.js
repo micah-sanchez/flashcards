@@ -27,7 +27,7 @@ function Study({decks}) {
             }
         }
         getDeck();
-    }, []);
+    }, [deck]);
     
     const currentCard = cards[index] || {}
     const deckName = deck.name;
