@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { readDeck, updateCard, readCard } from "../utils/api";
 import { useParams, useHistory } from "react-router-dom";
+import CardComponent from "./CardComponent";
 
 function EditCard() {
     const history = useHistory();
@@ -40,7 +41,6 @@ function EditCard() {
             try {
               const cardResponse = await readCard(cardId, abortController.signal)
               setCardFront(cardResponse.front);
-              console.log(cardFront)
               setCardBack(cardResponse.back);
             } catch(error) {
                 throw error
@@ -72,8 +72,9 @@ function EditCard() {
         history.push(`/decks/${deckId}`)
         
     }
-
+    
     return (
+
         <>
           <ul className="breadcrumb">
                 <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
@@ -83,7 +84,8 @@ function EditCard() {
                 <li style={{paddingRight:"10px", paddingLeft:"10px"}}>Edit Card {cardId}</li>
             </ul>
           <h1>Edit Card</h1>
-            <form onSubmit={editCardSubmitHandler}>
+
+            {/* <form onSubmit={editCardSubmitHandler}>
               <label style={{paddingTop: "20px"}}>Front</label>
               <textarea style={{width:"100%"}}
                 name="card-front"
@@ -104,7 +106,17 @@ function EditCard() {
               />
               <button style={{marginTop: "20px", marginRight: "10px", borderRadius: "10px"}} onClick={() => history.push(`/decks/${deckId}`)}>Cancel</button>
               <button style={{borderRadius: "10px"}} type="submit" >Submit</button>
-            </form>
+            </form> */}
+
+            <CardComponent
+                front={cardFront} 
+                back={cardBack} 
+                deck={deck}
+                setFront={setCardFront} 
+                setBack={setCardBack} 
+                handleSubmit={editCardSubmitHandler}
+                handleChange = {editCardChangeHandler}
+                />
         </>
     )
 }
