@@ -1,7 +1,7 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
 
-function CardComponent({front, back, deck, handleSubmit, handleChange}) {
+function CardComponent({front, back, deck, handleSubmit, handleChange, placeholderFront = "", placeholderBack = ""}) {
     const history = useHistory();
 
     return (
@@ -12,7 +12,7 @@ function CardComponent({front, back, deck, handleSubmit, handleChange}) {
                     type="text"
                     id="card-front"
                     name="card-front"
-                    placeholder="Front Side of Card"
+                    placeholder={placeholderFront}
                     rows="3"
                     onChange={handleChange}
                     value={front}
@@ -22,7 +22,7 @@ function CardComponent({front, back, deck, handleSubmit, handleChange}) {
                     type="text"
                     id="back"
                     name="back"
-                    placeholder="Back Side of Card"
+                    placeholder={placeholderBack}
                     rows="3"
                     onChange={handleChange}
                     value={back}
