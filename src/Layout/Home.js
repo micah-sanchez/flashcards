@@ -28,7 +28,7 @@ function Home() {
         <>
             <Switch>
                 <Route exact path="/">
-                    <button style={{borderRadius:"10px"}}onClick={() => history.push("/decks/new")}>Create Deck</button>
+                    <button style={{borderRadius:"10px"}} onClick={() => history.push("/decks/new")}>Create Deck</button>
                     <DeckList decks={decks} setDecks={setDecks} handleDelete={handleDelete}/>
                 </Route>
                 <Route exact path="/decks/new">
@@ -53,9 +53,6 @@ function Home() {
                     <NotFound />
                 </Route>
             </Switch>
-
-            
-            
         </>
     )
 }
