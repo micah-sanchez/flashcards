@@ -10,6 +10,7 @@ function AddCards({decks}) {
     const placeholderFront = "Front Side of Card";
     const placeholderBack = "Back Side of Card";
 
+
     const history = useHistory();
 
     const initialCardData = {
@@ -34,6 +35,7 @@ function AddCards({decks}) {
     }, []);
 
     const cardChangeHandler = ({target}) => {
+        console.log(target.name, target.value)
         setCardData({
             ...cardData,
             [target.name]: target.value
@@ -44,6 +46,7 @@ function AddCards({decks}) {
         event.preventDefault();
         createCard(deckId, cardData);
         setCardData(initialCardData);
+        history.push(`/decks/${deck.id}`);
     }
 
     return (
