@@ -8,10 +8,14 @@ function EditCard() {
   
     const { deckId, cardId } = useParams()
 
-//     const deckIdentifier = Number.parseInt(useParams().deckId);
-//     const cardIdentifier = Number.parseInt(useParams().cardId);
+    const intialCardState = {
+        front: "",
+        back: "",
+        deckId: "",
+        id: ""
+    }
   
-    const [card, setCard]= useState({});
+    const [card, setCard]= useState(intialCardState);
     const [cardFront, setCardFront] = useState("");
     const [cardBack, setCardBack] = useState("");
     const [deck, setDeck] = useState("");
@@ -40,6 +44,7 @@ function EditCard() {
         async function getCard() {
             try {
               const cardResponse = await readCard(cardId, abortController.signal)
+              console.log(cardId)
               setCard(cardResponse)
               setCardFront(cardResponse.front);
               setCardBack(cardResponse.back);
