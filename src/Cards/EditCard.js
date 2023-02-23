@@ -11,7 +11,7 @@ function EditCard() {
 //     const deckIdentifier = Number.parseInt(useParams().deckId);
 //     const cardIdentifier = Number.parseInt(useParams().cardId);
   
-    const [card, setCard]= useState({})
+    const [card, setCard]= useState({});
     const [cardFront, setCardFront] = useState("");
     const [cardBack, setCardBack] = useState("");
     const [deck, setDeck] = useState("");
@@ -40,6 +40,7 @@ function EditCard() {
         async function getCard() {
             try {
               const cardResponse = await readCard(cardId, abortController.signal)
+              setCard(cardResponse)
               setCardFront(cardResponse.front);
               setCardBack(cardResponse.back);
             } catch(error) {
@@ -52,7 +53,6 @@ function EditCard() {
         getCard();
     }, [cardId]);
 
-
     const editCardChangeHandler = (event) => {
         if (event.target.name === "card-front") {
             setCardFront(event.target.value)
@@ -63,10 +63,10 @@ function EditCard() {
 
     const editCardSubmitHandler = (event) => {
         event.preventDefault();
-        updateCard({
+        console.log(cardFront, cardBack)
+        updateCard({ //card is undefined which is why it's not saving in my submit handler
             ...card,
-                front: 
-          cardFront,
+                front: cardFront,
                 back: cardBack,
             })
         history.push(`/decks/${deckId}`)
@@ -79,7 +79,7 @@ function EditCard() {
           <ul className="breadcrumb">
                 <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
                 <li>/</li>
-                <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="#">Deck {deck.name} </a></li>
+                <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="/decks/:deckId">Deck {deck.name} </a></li>
                 <li>/</li>
                 <li style={{paddingRight:"10px", paddingLeft:"10px"}}>Edit Card {cardId}</li>
             </ul>
