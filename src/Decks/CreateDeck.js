@@ -39,7 +39,7 @@ function CreateDeck() {
                 <label style={{width:'100%'}}>Name</label>
                 <input style={{width:'100%'}}
                     type="text"
-                    id="name"
+                        id="name"
                     name="name"
                     placeholder="Deck Name"
                     onChange={handleChange}
