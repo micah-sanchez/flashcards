@@ -50,7 +50,7 @@ function EditDeck() {
         <ul className="breadcrumb">
                 <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
                 <li>/</li>
-                <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="#">{deckName}</a></li>
+                <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="/decks/:deckId">{deckName}</a></li>
                 <li>/</li>
                 <li style={{paddingRight:"10px", paddingLeft:"10px"}}>Study</li>
             </ul>
