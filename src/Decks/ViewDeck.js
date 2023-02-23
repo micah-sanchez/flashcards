@@ -29,9 +29,7 @@ function ViewDeck({handleDelete}) {
         retrieveDeck();
     }, [deckId]);
 
-    const editClickHandler = (index) => {
-        history.push(`/decks/${deckId}/cards/${index+1}/edit`);
-    }
+    
 
     const handleCardDelete = (id, arrayIndex) => {
         console.log(cards)
@@ -46,6 +44,9 @@ function ViewDeck({handleDelete}) {
     let cardList;
         if (cards) {
         cardList = cards.map((indivCard, index) => {
+            const editClickHandler = (index) => {
+                history.push(`/decks/${deckId}/cards/${indivCard.id}/edit`);
+            }
             return(
             <table key={indivCard.id} style={{border:"solid", borderRadius:"3px", borderColor:"lightgray", margin:"10px", width:"100%"}}>
                 <tbody>
@@ -55,7 +56,7 @@ function ViewDeck({handleDelete}) {
                     </tr>
                     <tr>
                         <td>
-                            <button key={index} style={{margin: "10px", marginRight: "10px", borderRadius: "10px"}} onClick={() => editClickHandler(index)}>Edit</button>
+                            <button key={index} style={{margin: "10px", marginRight: "10px", borderRadius: "10px"}} onClick={() => editClickHandler(indivCard.id)}>Edit</button>
                             <button style={{borderRadius: "10px"}} onClick={() => handleCardDelete(indivCard.id, index)}>Trash</button>
                         </td>
                     </tr>
