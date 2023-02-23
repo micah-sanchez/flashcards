@@ -59,11 +59,12 @@ function EditCard() {
     }, [cardId]);
 
     const editCardChangeHandler = (event) => {
-        if (event.target.name === "card-front") {
+        if (event.target.name === "front") {
             setCardFront(event.target.value)
         } else {
             setCardBack(event.target.value)
         }
+        
     }
 
     const editCardSubmitHandler = (event) => {
