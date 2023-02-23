@@ -1,7 +1,7 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
 
-function CardComponent({front, back, deck, handleSubmit, handleChange, placeholderFront = "", placeholderBack = ""}) {
+function CardComponent({front, back, deck, handleSubmit, handleChange}) {
     const history = useHistory();
 
     return (
@@ -10,9 +10,9 @@ function CardComponent({front, back, deck, handleSubmit, handleChange, placehold
             <label><h5>Front</h5></label>
             <textarea style={{width:'100%'}}
                     type="text"
-                    id="card-front"
-                    name="card-front"
-                    placeholder={placeholderFront}
+                    id="front"
+                    name="front"
+                    //placeholder={placeholderFront}
                     rows="3"
                     onChange={handleChange}
                     value={front}
@@ -22,7 +22,7 @@ function CardComponent({front, back, deck, handleSubmit, handleChange, placehold
                     type="text"
                     id="back"
                     name="back"
-                    placeholder={placeholderBack}
+                    //placeholder={placeholderBack}
                     rows="3"
                     onChange={handleChange}
                     value={back}
