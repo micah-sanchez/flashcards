@@ -70,7 +70,7 @@ function EditCard() {
     const editCardSubmitHandler = (event) => {
         event.preventDefault();
         console.log(cardFront, cardBack)
-        updateCard({ //card is undefined which is why it's not saving in my submit handler
+        updateCard({ 
             ...card,
                 front: cardFront,
                 back: cardBack,
@@ -90,29 +90,6 @@ function EditCard() {
                 <li style={{paddingRight:"10px", paddingLeft:"10px"}}>Edit Card {cardId}</li>
             </ul>
           <h1>Edit Card</h1>
-
-            {/* <form onSubmit={editCardSubmitHandler}>
-              <label style={{paddingTop: "20px"}}>Front</label>
-              <textarea style={{width:"100%"}}
-                name="card-front"
-                id="card-front"
-                value={cardFront}
-                type="text"
-                rows="3"
-                onChange={editCardChangeHandler}
-              />
-              <label style={{paddingTop: "20px"}}>Back</label>
-              <textarea style={{width:"100%"}}
-                name="card-back"
-                id="card-back"
-                value={cardBack}
-                type="text"
-                rows="3"
-                onChange={editCardChangeHandler}
-              />
-              <button style={{marginTop: "20px", marginRight: "10px", borderRadius: "10px"}} onClick={() => history.push(`/decks/${deckId}`)}>Cancel</button>
-              <button style={{borderRadius: "10px"}} type="submit" >Submit</button>
-            </form> */}
 
             <CardComponent
                 front={cardFront} 
