@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from "react";
 import {useParams, useHistory} from "react-router-dom";
-import EditCard from "../Cards/EditCard";
-import { readDeck } from "../utils/api";
+import { readDeck, deleteCard } from "../utils/api";
 
 
 function ViewDeck({handleDelete}) {
@@ -18,6 +17,7 @@ function ViewDeck({handleDelete}) {
                 const deckData = await readDeck(deckId);
                 setDeck(deckData);
                 setCards(deckData.cards)
+                console.log(deckId)
             } catch(error) {
                 if (error.name === "AbortError") {
                     console.log("AbortError");
@@ -33,24 +33,34 @@ function ViewDeck({handleDelete}) {
         history.push(`/decks/${deckId}/cards/${index+1}/edit`);
     }
 
+    const handleCardDelete = (id, arrayIndex) => {
+        console.log(cards)
+        if (window.confirm("Delete this deck?\n\nYou will not be able to recover it.")) {
+            deleteCard(id);
+            cards.splice(arrayIndex, 1);
+            setCards((prev) => [...cards]);
+            history.push("/");
+        }
+      };
+
     let cardList;
         if (cards) {
         cardList = cards.map((indivCard, index) => {
             return(
-            <>
-            <table key={index} style={{border:"solid", borderRadius:"3px", borderColor:"lightgray", margin:"10px", width:"100%"}}>
+            <table key={indivCard.id} style={{border:"solid", borderRadius:"3px", borderColor:"lightgray", margin:"10px", width:"100%"}}>
                 <tbody>
                     <tr>
                         <td style={{width:"50%", heigth: "100%"}}>{indivCard.front}</td>
                         <td style={{width:"50%", heigth: "100%"}}>{indivCard.back}</td>
                     </tr>
                     <tr>
+                        <td>
                             <button key={index} style={{margin: "10px", marginRight: "10px", borderRadius: "10px"}} onClick={() => editClickHandler(index)}>Edit</button>
-                            <button style={{borderRadius: "10px"}}>Trash</button>
+                            <button style={{borderRadius: "10px"}} onClick={() => handleCardDelete(indivCard.id, index)}>Trash</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            </>
         )
     })
     } else {
@@ -59,7 +69,7 @@ function ViewDeck({handleDelete}) {
 
     return (
         <>
-        <ul class="breadcrumb">
+        <ul className="breadcrumb">
             <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
             <li>/</li>
             <li style={{paddingRight:"10px", paddingLeft:"10px"}}><a href="#">{deck.name}</a></li>
