@@ -10,7 +10,7 @@ function CreateDeck() {
         name: "",
         description: ""
     } 
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState(initialFormData);
 
     const handleChange = ({target}) => {
         setFormData({
@@ -28,7 +28,7 @@ function CreateDeck() {
     return (
         <>
 
-        <ul class="breadcrumb">
+        <ul className="breadcrumb">
             <li style={{paddingRight:"10px"}}><a href="/" >Home </a></li>
             <li>/</li>
             <li style={{paddingRight:"10px", paddingLeft:"10px"}}>Create Deck</li>
