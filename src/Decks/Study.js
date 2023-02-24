@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Route, useParams, useHistory } from "react-router-dom";
-import NotFound from "../Layout/NotFound";
 import { readDeck } from "../utils/api";
-import AddCards from "../Cards/AddCards";
 
-function Study({decks}) {
+function Study({deck, setDeck}) {
 
     const history = useHistory();
 
     const [frontSide, setFrontSide] = useState(true);
     const [index, setIndex] = useState(0);
-    const [deck, setDeck] = useState({});
+    // const [deck, setDeck] = useState({});
     const [cards, setCards] = useState([]);
 
     const params = useParams();
@@ -51,7 +49,7 @@ function Study({decks}) {
                 setFrontSide(!frontSide)
                 setIndex(0)
             } else {
-                window.open("/")
+                history.push("/")
             }
         }
     }
