@@ -7,7 +7,6 @@ function EditDeck({deck, setDeck}) {
     const history = useHistory();
 
     const deckIdentifier = Number.parseInt(useParams().deckId);
-    // const [deckToEdit, setDeckToEdit] = useState({});
     const [deckName, setDeckName] = useState("");
     const [deckDesc, setDeckDesc] = useState("");
 
@@ -23,7 +22,7 @@ function EditDeck({deck, setDeck}) {
             }
         }
         getDeck();
-    }, [deckIdentifier]);
+    }, [deckIdentifier]); // //deck.id
 
     const editChangeHandler = (event) => {
         if (event.target.name === "name") {
@@ -38,7 +37,6 @@ function EditDeck({deck, setDeck}) {
         event.preventDefault();
         updateDeck({
             ...deck,
-            // ...deckToEdit,
             name: deckName,
             description: deckDesc,
         });
