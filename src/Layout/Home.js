@@ -12,15 +12,22 @@ import EditCard from "../Cards/EditCard";
 
 function Home() {
 
+    const initialDeckData = {
+        id: "",
+        name: "",
+        description: "",
+    }
+
     const history = useHistory();
     const [decks, setDecks] = useState([]);
+    const [deck, setDeck] = useState(initialDeckData);
 
     const handleDelete = (id, arrayIndex) => {
         if (window.confirm("Delete this deck?")) {
             deleteDeck(id)
             decks.splice(arrayIndex, 1);
             setDecks(prev => [...decks])
-            window.open("/")
+            history.push("/")
         }
     }
     
@@ -35,19 +42,19 @@ function Home() {
                     <CreateDeck />
                 </Route>
                 <Route exact path="/decks/:deckId">
-                    <ViewDeck decks={decks} handleDelete={handleDelete} />
+                    <ViewDeck decks={decks} handleDelete={handleDelete} deck={deck} setDeck={setDeck}/>
                 </Route>
                 <Route exact path="/decks/:deckId/study">
-                    <Study decks={decks}/>
+                    <Study decks={decks} deck={deck} setDeck={setDeck}/>
                 </Route>
                 <Route exact path="/decks/:deckId/cards/new">
-                    <AddCards />
+                    <AddCards deck={deck} setDeck={setDeck}/>
                 </Route>
                 <Route exact path="/decks/:deckId/edit">
-                    <EditDeck />
+                    <EditDeck deck={deck} setDeck={setDeck}/>
                 </Route>
                 <Route exact path="/decks/:deckId/cards/:cardId/edit">
-                    <EditCard />
+                    <EditCard deck={deck} setDeck={setDeck}/>
                 </Route>
                 <Route>
                     <NotFound />
