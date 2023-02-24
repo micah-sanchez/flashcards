@@ -79,7 +79,7 @@ function DeckList({ decks, setDecks }) {
       deleteDeck(id);
       decks.splice(arrayIndex, 1);
       setDecks((prev) => [...decks]);
-      window.open("/");
+      history.push("/");
     }
   };
 
