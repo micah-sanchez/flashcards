@@ -23,6 +23,7 @@ function CreateDeck() {
         event.preventDefault();
         createDeck(formData);
         setFormData(initialFormData);
+        history.push("/")
     }
 
     return (
