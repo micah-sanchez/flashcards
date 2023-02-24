@@ -3,10 +3,10 @@ import {useParams, useHistory} from "react-router-dom";
 import { readDeck, deleteCard } from "../utils/api";
 
 
-function ViewDeck({handleDelete}) {
+function ViewDeck({handleDelete, deck, setDeck}) {
     const deckId = Number.parseInt(useParams().deckId);
     
-    const [deck, setDeck] = useState();
+    // const [deck, setDeck] = useState();
     const [cards, setCards] = useState();
 
     const history = useHistory();
