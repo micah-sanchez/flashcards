@@ -46,7 +46,7 @@ function AddCards({decks}) {
         event.preventDefault();
         createCard(deckId, cardData);
         setCardData(initialCardData);
-        history.push(`/decks/${deck.id}`);
+        //history.push(`/decks/${deck.id}`);
     }
 
     return (
