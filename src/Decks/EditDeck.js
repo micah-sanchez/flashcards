@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import DeckList from "./DeckList";
 import { readDeck, updateDeck } from "../utils/api";
 
-function EditDeck() {
+function EditDeck({deck, setDeck}) {
 
     const history = useHistory();
 
     const deckIdentifier = Number.parseInt(useParams().deckId);
-    const [deckToEdit, setDeckToEdit] = useState({});
+    // const [deckToEdit, setDeckToEdit] = useState({});
     const [deckName, setDeckName] = useState("");
     const [deckDesc, setDeckDesc] = useState("");
 
@@ -16,7 +15,7 @@ function EditDeck() {
         async function getDeck() {
             try {
                 const response = await readDeck(deckIdentifier);
-                setDeckToEdit(response);
+                setDeck(response);
                 setDeckName(response.name);
                 setDeckDesc(response.description)
             } catch(error) {
@@ -38,7 +37,8 @@ function EditDeck() {
     const editSubmitHandler = (event) => {
         event.preventDefault();
         updateDeck({
-            ...deckToEdit,
+            ...deck,
+            // ...deckToEdit,
             name: deckName,
             description: deckDesc,
         });
